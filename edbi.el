@@ -970,6 +970,8 @@ This function kills the old buffer if it exists."
 
 (defvar edbi:dialog-buffer-name "*edbi-dialog-ds*" "[internal] edbi:dialog-buffer-name.")
 
+(defvar edbi--data-source)
+
 (defun edbi:dialog-ds-buffer (data-source on-ok-func
                                           &optional password-show error-msg)
   "[internal] Create and return the editing buffer for the given DATA-SOURCE."
@@ -1105,7 +1107,8 @@ This function kills the old buffer if it exists."
              (widget-value (plist-get fields 'username))
              (widget-value (plist-get fields 'auth))))
       (edbi:ds-history-add data-source)
-      (let ((msg (funcall on-ok-func data-source)))
+      (let ((msg (let ((edbi--data-source data-source))
+                   (funcall on-ok-func data-source))))
         (if msg
             (edbi:dialog-replace-buffer-window
              (current-buffer)
@@ -1163,7 +1166,7 @@ This function kills the old buffer if it exists."
                    (condition-case err
                        (progn
                          (setq conn (edbi:start))
-                         (edbi:connect conn data-source)
+                         (edbi:connect conn edbi--data-source)
                          nil)
                      (error (format "%s" err))))
              (cond

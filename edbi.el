@@ -970,6 +970,8 @@ This function kills the old buffer if it exists."
 
 (defvar edbi:dialog-buffer-name "*edbi-dialog-ds*" "[internal] edbi:dialog-buffer-name.")
 
+(declare-function widget-forward "wid-edit")
+
 (defvar edbi--data-source)
 
 (defun edbi:dialog-ds-buffer (data-source on-ok-func

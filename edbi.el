@@ -1449,6 +1449,8 @@ that the current buffer is the query editor buffer."
   (interactive)
   (erase-buffer))
 
+(defvar-local edbi:buffer-id nil)
+
 (defun edbi:dbview-query-editor-create-buffer (conn &optional force-create-p)
   "[internal] Create a buffer for query editor."
   (let ((buf-list (edbi:connection-buffers conn)))
@@ -1912,12 +1914,19 @@ If the region is active in the query buffer, the selected string is executed."
   "Face for the type selected candidate."
   :group 'edbi)
 
+(defvar ac-modes)
+
 (defun edbi:setup-completion-reset ()
   "Clear completion settings."
   ;; remove ac settings
   (remove-hook 'edbi:sql-mode-hook 'edbi:ac-edbi:sql-mode-hook)
   (delq 'edbi:sql-mode ac-modes)
   )
+
+(defvar edbi:tables)
+(defvar edbi:columns)
+(defvar edbi:types)
+(defvar edbi:keywords)
 
 (defun edbi:setup-completion-auto-complete ()
   "Initialization for auto-complete."
@@ -1963,7 +1972,9 @@ If the region is active in the query buffer, the selected string is executed."
                                    (when (listp i) (setq i (car i)))
                                    i) ret))
                ret))))))
-    
+
+(defvar ac-sources)
+
 (defun edbi:ac-edbi:sql-mode-hook ()
   (make-local-variable 'ac-sources)
   (setq ac-sources '(ac-source-words-in-same-mode-buffers

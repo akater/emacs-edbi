@@ -3,7 +3,7 @@
 ;; Copyright (C) 2011, 2012, 2013  SAKURAI Masashi
 
 ;; Author: SAKURAI Masashi <m.sakurai at kiwanami.net>
-;; Version: 0.1.3
+;; Version: 0.1.4
 ;; Keywords: database, epc
 ;; URL: https://github.com/kiwanami/emacs-edbi
 

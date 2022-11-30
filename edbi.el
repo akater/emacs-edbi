@@ -1709,7 +1709,6 @@ If the region is active in the query buffer, the selected string is executed."
 (defun edbi:dbview-query-result-quicklook-copy-command ()
   "Copy the whole content."
   (interactive)
-  (mark-whole-buffer)
   (copy-region-as-kill (point-min) (point-max)))
 
 (setq edbi:dbview-query-result-quicklook-mode-map

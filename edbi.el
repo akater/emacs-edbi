@@ -1928,6 +1928,8 @@ If the region is active in the query buffer, the selected string is executed."
 (defvar edbi:types)
 (defvar edbi:keywords)
 
+(eval-when-compile (require 'auto-complete))
+
 (defun edbi:setup-completion-auto-complete ()
   "Initialization for auto-complete."
   (when (eq 'auto-complete edbi:completion-tool) 
